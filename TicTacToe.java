@@ -27,6 +27,9 @@ class TicTacToe {
             System.out.println("player -> " + player);
 
 
+
+
+            // mark: setuup checks and  changes players turn
             if (checkRows(row, player)
                     || checkCols(col, player)
                     || checkDiag(player)
@@ -35,7 +38,6 @@ class TicTacToe {
                     || (row + col == N - 1 && checkDiag(player))) {
                 return player == 1 ? "A" : "B";
             }
-            // mark: changes players turn
             return moves.length == N * N ? "Draw" : "Pending";
         }
 

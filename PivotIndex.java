@@ -1,6 +1,6 @@
 
 // https://leetcode.com/problems/find-pivot-index/
-
+// https://www.youtube.com/watch?v=brlJAIdDvkM&t=348s
 public class PivotIndex {
     public int pivotIndex(int[] nums) {
 
@@ -10,15 +10,15 @@ public class PivotIndex {
             sum+=i;
         }
 
-        int rS = sum;
-        int lS = 0;
+        int rightSum = sum;
+        int leftSum = 0;
 
         for(int idx = 0 ; idx < nums.length; idx++) {
-            rS -= nums[idx];
-            if (rS == lS ) {
+            rightSum -= nums[idx];
+            if (rightSum == leftSum ) {
                 return idx;
             }
-            lS += nums[idx];
+            leftSum += nums[idx];
         }
 
         return -1;

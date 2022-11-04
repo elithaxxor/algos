@@ -1,5 +1,6 @@
 
 // https://leetcode.com/problems/diagonal-traverse/
+// https://www.youtube.com/watch?v=ZaTWa5s1ndI&list=PL1MJrDFRFiKaqGdb3lM27Bqk5EKpVm2-r&index=2
 // diagonal matrix traversal.
 // odd col indcates shift right, even indicates shift down.
 
@@ -9,30 +10,47 @@ public class FindDiagonalOrder {
     public int[] findDiagonalOrder(int[][] mat) {
         int R = mat.length;
         int C = mat[0].length;
-        int i = 0; int j = 0;
+        int x = 0;
+        int y = 0;
 
 
-        if (R == 0 || C == 0) { return new int []{}; }
-        int [] res = new int[R*C];
+        if (R == 0 || C == 0) {
+            return new int[]{};
+        }
+        int[] res = new int[R * C];
 
 
         int idx = 0;
         while (idx < R) {
-            int sum = i + j;
+            int sum = x + y;
             int key = sum % 2;
-            res[idx] = mat[i][j];
+            res[idx] = mat[y][x];
 
-            if (key == 0) {
-                if(i < R - 1 && j > 0) {
-                    j++;
-                    i--;
+            // mark: traversal. 1st start with L & R boundries, then controll
+            if (key == 0) { // mark: even
+                if (x < C - 1 && y > 0) { //[UP and RIGHT]
+                    x++;
+                    y--;
+                } else if (x < C - 1) { //[RIGHT] (IF SPACE AVAILABLE)
+                    x++;
+                } else { //[DOWN]
+                    y++;
+                }
+
+            } else { // [mark] index -
+                if (y < R - 1 && x > 0) { // [LEFT and DOWN]
+                    x--;
+                    y++;
+                } else if (y < R - 1) { // [DOWN]
+                    y++;
+                } else {
+                    x++; // [RIGHT]
+                }
+                y++;
+                x++;
+                idx++;
             }
-            j++;
-            i++;
-            idx++;
         }
-
-
         return res;
     }
         public static void main(String[] args) {
@@ -42,4 +60,4 @@ public class FindDiagonalOrder {
         System.out.println("res -> " + r);
     }
 }
-}
+

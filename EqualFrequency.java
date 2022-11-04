@@ -1,50 +1,43 @@
-import java.util.List;
-// https://leetcode.com/problems/remove-letter-to-equalize-frequency/
-public class EqualFrequency {
+class SpiralMatrixIII {
+    public void setZeroes(int[][] matrix) {
+        int R = matrix.length;
+        int C = matrix[0].length;
+        int x = 0;
+        int y = 0;
+        int end = R * C - 1;
+        int idx = 0;
+        System.out.println("end " + end);
 
-    public boolean equalFrequency(String word) {
+        while (idx <= end)
+            for (int i = 0; i < R; i++) {
 
-        int [] freq = new int [26];
-        int count=0;
-        for(char c : word.toCharArray()) {
-            freq[c - 'a']++;
-            System.out.println(freq[count]);
-            count++;
-        }
-
-
-        for (int i = 0; i < 26; i++) {
-            freq[i]--;
-            System.out.println("freq dec " + freq[i]--);
-            if (equalFrequency(freq)) {
-                return true;
+                for (int j = 0; j < C; j++) {
+                    if (matrix[i][0] == 0) {
+                        while(x <= R) {
+                            matrix[x][0] = 0;
+                            x++;
+                        }
+                        idx++;
+                    }
+                    if (matrix[0][j] == 0) {
+                        while(y <= C) {
+                            matrix[0][y] = 0;
+                            y++;
+                        }
+                    }
+                }
+                idx++;
+                System.out.println("end " + idx);
             }
-            System.out.println("freq inc " + freq[i]--);
-            freq[i]++;
-        }
-
-        return false;
-    }
-
-    public boolean equalFrequency(int [] freqMap) {
-        int freq = 0;
-        for (int i : freqMap) {
-            if (i == 0 || freq == i) {
-                continue;
-            } else if (freq == 0 ) {
-                freq = i;
-            } else {
-                return false;
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                System.out.print(matrix[i][j] );
             }
         }
-        return true;
     }
-
-    public static void main(String[] args) {
-        EqualFrequency ip = new EqualFrequency();
-        String arg = "abcc";
-        boolean r = ip.equalFrequency(arg);
-        System.out.println("res -> " + r);
-    }
+public static void main(String[] args) {
+    int[][] input = new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+    SpiralMatrixIII run = new SpiralMatrixIII();
+    run.setZeroes(input);
 }
-
+}
